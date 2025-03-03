@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Click Counter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f5f5f5;
+        }
+        
+        .button-container {
+            margin-bottom: 30px;
+        }
+        
+        #clickButton {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 15px 32px;
+            font-size: 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.1s, box-shadow 0.1s;
+        }
+        
+        #clickButton:hover {
+            background-color: #cc0000;
+        }
+        
+        #clickButton:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        #counter {
+            font-size: 20px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="button-container">
+        <button id="clickButton">press</button>
+    </div>
+    
+    <div id="counter">Number of clicks: 0</div>
+    
+    <script>
+        let clickCount = 0;
+        const button = document.getElementById('clickButton');
+        const counter = document.getElementById('counter');
+        
+        // Check if there's a stored count in localStorage
+        if (localStorage.getItem('clickCount')) {
+            clickCount = parseInt(localStorage.getItem('clickCount'));
+            counter.textContent = `Number of clicks: ${clickCount}`;
+        }
+        
+        button.addEventListener('click', () => {
+            clickCount++;
+            counter.textContent = `Number of clicks: ${clickCount}`;
+            
+            // Store the count in localStorage to persist between page refreshes
+            localStorage.setItem('clickCount', clickCount);
+        });
+    </script>
+</body>
+</html>
